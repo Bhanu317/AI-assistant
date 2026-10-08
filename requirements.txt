@@ -2,9 +2,9 @@
 python-dotenv
 requests
 langchain
-langchain-text-splitters
-langchain-community
 langchain-core
+langchain-community
+langchain-text-splitters
 langchain-google-genai
 langgraph
 langgraph-checkpoint-sqlite
@@ -12,4 +12,4 @@ faiss-cpu
 pypdf
 duckduckgo-search
 ddgs
-aiosqlite
+tiktoken==0.8.0
