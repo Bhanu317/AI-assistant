@@ -1,7 +1,16 @@
+import os
 import uuid
 
 import streamlit as st
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
+
+if "GOOGLE_API_KEY" not in os.environ:
+    try:
+        secret_key = st.secrets.get("GOOGLE_API_KEY") or st.secrets.get("google_api_key")
+        if secret_key:
+            os.environ["GOOGLE_API_KEY"] = str(secret_key)
+    except Exception:
+        pass
 
 from langraph_rag_backend import (
     chatbot,

@@ -23,7 +23,21 @@ load_dotenv()
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 if not GOOGLE_API_KEY:
-    raise ValueError("Please set the GOOGLE_API_KEY environment variable or add it to your .env file.")
+    try:
+        import streamlit as st
+
+        secret_key = st.secrets.get("GOOGLE_API_KEY") or st.secrets.get("google_api_key")
+        if secret_key:
+            GOOGLE_API_KEY = str(secret_key)
+            os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
+    except Exception:
+        pass
+
+if not GOOGLE_API_KEY:
+    raise ValueError(
+        "Please set the GOOGLE_API_KEY environment variable, add it to your .env file, "
+        "or configure it in Streamlit Cloud secrets."
+    )
 
 # -------------------
 # 1. LLM + embeddings
